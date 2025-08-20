@@ -1,0 +1,26 @@
+{
+ "allow_roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
+ "creation": "2025-08-18 19:47:47.379049",
+ "docstatus": 0,
+ "doctype": "Module Onboarding",
+ "documentation_url": "DocumentationURL",
+ "idx": 0,
+ "is_complete": 0,
+ "modified": "2025-08-18 19:47:47.379049",
+ "modified_by": "Administrator",
+ "module": "Vera",
+ "name": "demo Onboarding",
+ "owner": "Administrator",
+ "steps": [
+  {
+   "step": "step 1"
+  }
+ ],
+ "subtitle": "Subtitle",
+ "success_message": "Success Message",
+ "title": "demo Onboarding"
+}
