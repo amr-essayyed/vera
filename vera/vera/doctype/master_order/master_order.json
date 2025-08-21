@@ -15,8 +15,8 @@
   "data_surd",
   "actions_section",
   "quotation",
-  "sales_order",
   "purchase_orders",
+  "sales_order",
   "sales_order_tab",
   "sales_total",
   "items",
@@ -26,6 +26,7 @@
  ],
  "fields": [
   {
+   "allow_bulk_edit": 1,
    "fieldname": "purchase_orders",
    "fieldtype": "Table",
    "label": "Purchase Orders",
@@ -34,7 +35,6 @@
   {
    "fieldname": "sales_order",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Sales Order",
    "options": "Sales Order"
   },
@@ -42,6 +42,7 @@
    "fetch_from": "cs_order.customer_name",
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
@@ -49,6 +50,7 @@
   {
    "fieldname": "quotation",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Quotation",
    "options": "Quotation"
   },
@@ -71,6 +73,7 @@
    "options": "Sales Order Item"
   },
   {
+   "allow_in_quick_entry": 1,
    "fetch_from": "sales_order.delivery_date",
    "fieldname": "delivery_date",
    "fieldtype": "Date",
@@ -90,9 +93,12 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_in_quick_entry": 1,
+   "default": "pending",
    "fieldname": "data_surd",
-   "fieldtype": "Data",
-   "label": "Status"
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "pending\nshipping\nshipped\npaid"
   },
   {
    "fieldname": "actions_section",
@@ -116,7 +122,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-20 08:22:11.639882",
+ "modified": "2025-08-21 15:44:59.226040",
  "modified_by": "Administrator",
  "module": "Vera",
  "name": "Master Order",
@@ -136,6 +142,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",

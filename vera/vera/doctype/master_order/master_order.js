@@ -14,9 +14,11 @@ frappe.ui.form.on("Master Order", {
         // frappe.show_alert("refreshed")
 
         // chanage add row button value
-        frm.fields_dict["purchase_orders"].grid.wrapper
-            .find('.grid-add-row')
-            .text("➕ Add Purchase Order");
+        if (frm.fields_dict["purchase_orders"]) {
+            frm.fields_dict["purchase_orders"].grid.wrapper
+                .find('.grid-add-row')
+                .text("➕ Add Purchase Order");
+        }
         
         // add purchase order button
         add_PO_buttons(frm);
@@ -24,16 +26,19 @@ frappe.ui.form.on("Master Order", {
         handle_PO_sections(frm)
         
         // When creating a new Sales Order from link field
-        frm.fields_dict["sales_order"].df.get_route_options_for_new_doc = function() {
-            if (!frm.doc.customer || !frm.doc.delivery_date) {
-                frappe.throw("Please select a Customer & Delivery Date first");
-            }
-            return {
-                customer: frm.doc.customer,
-                delivery_date: frm.doc.delivery_date
+        if (frm.fields_dict["sales_order"]) {
+            
+            frm.fields_dict["sales_order"].df.get_route_options_for_new_doc = function() {
+                if (!frm.doc.customer || !frm.doc.delivery_date) {
+                    frappe.throw("Please select a Customer & Delivery Date first");
+                }
+                return {
+                    customer: frm.doc.customer,
+                    delivery_date: frm.doc.delivery_date
+                };
             };
-        };
-        
+        }
+            
         
 	},
     sales_order(frm) {
@@ -105,35 +110,41 @@ function add_PO_buttons(frm) {
 function filter_sales_orders(frm) {
     // filter for cutomer name in sales orders
     // Apply custom logic to the Sales Order link field
-    frm.fields_dict["sales_order"].get_query = function() {
-        return {
-            filters: {
-                customer: frm.doc.customer
-            }
-        };
-    };
+    if (frm.fields_dict["sales_order"]) {
+        
+        frm.fields_dict["sales_order"].get_query = function() {
+            return {
+                filters: {
+                    customer: frm.doc.customer
+                }
+            };
+        }
+    }
 }
 
 function handle_PO_sections(frm) {
-    const wrapper = frm.fields_dict["po_html"].$wrapper;
-    wrapper.empty(); // clear old sections
+    if(frm.doc.purchase_orders.length > 0) {
 
-    for (let itm of frm.doc.purchase_orders){
-        frappe.call({
-            method: "frappe.client.get",
-            args: {
-                doctype: "Purchase Order",
-                name: itm.purchase_order
-            },
-            callback: function(r) {
-                if (r.message) {
-                    console.log(r.message);  // This is your Purchase Order doc
-                    // create a section
-                    fetch_POs(frm, r.message)
-                }
-            }
-        });             
+        const wrapper = frm.fields_dict["po_html"].$wrapper;
+        wrapper.empty(); // clear old sections
         
+        for (let itm of frm.doc.purchase_orders){
+            frappe.call({
+                method: "frappe.client.get",
+                args: {
+                    doctype: "Purchase Order",
+                    name: itm.purchase_order
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        console.log(r.message);  // This is your Purchase Order doc
+                        // create a section
+                        fetch_POs(frm, r.message)
+                    }
+                }
+            });             
+            
+        }
     }
 }
 
@@ -158,9 +169,9 @@ function fetch_POs(frm, po_doc) {
                             <th>Item Code</th>
                             <th>Item Name</th>
                             <th>Qty</th>
+                            <th>UOM</th>
                             <th>Rate</th>
                             <th>Amount</th>
-                            <th>UOM</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
