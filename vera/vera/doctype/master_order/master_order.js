@@ -100,7 +100,7 @@ frappe.ui.form.on('Master Order Purchase Item', {
 function add_PO_buttons(frm) {
     if (!frm.doc.sales_order) {
             frm.add_custom_button("Create New Sales Order", ()=>{
-                frappe.show_alert("works")
+                frappe.set_route('Form', 'Sales Order', 'New Sales Order');
             })
         }else {
              frm.remove_custom_button("Create New Sales Order")
