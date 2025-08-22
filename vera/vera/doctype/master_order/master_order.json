@@ -12,7 +12,7 @@
   "column_break_siey",
   "delivery_date",
   "column_break_sdag",
-  "data_surd",
+  "status",
   "actions_section",
   "quotation",
   "purchase_orders",
@@ -93,14 +93,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_in_quick_entry": 1,
-   "default": "pending",
-   "fieldname": "data_surd",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "pending\nshipping\nshipped\npaid"
-  },
-  {
    "fieldname": "actions_section",
    "fieldtype": "Section Break",
    "label": "Actions"
@@ -117,12 +109,20 @@
   {
    "fieldname": "po_html",
    "fieldtype": "HTML"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "pending\nshipping\nshipped\npaid"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-21 15:44:59.226040",
+ "modified": "2025-08-22 19:30:07.097155",
  "modified_by": "Administrator",
  "module": "Vera",
  "name": "Master Order",
